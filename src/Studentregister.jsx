@@ -1,10 +1,12 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';  
+import { useNavigate } from 'react-router-dom';  
 import { StudentRegisteryup } from './schemas/StudentRegisteryup';
 import styles from './assets/StudentRegister.module.css'; // CSS modülünü dahil ettik
 
 function Studentregister() {
+  const navigate = useNavigate();  
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -12,15 +14,18 @@ function Studentregister() {
             surname: "",
             password: "",
             passwordagain: "",
-            className: ""
+            role:""
         },
+
         validationSchema:StudentRegisteryup, 
+
         onSubmit: async (values) => {  
             try {
-                const response = await axios.post("/api/login", values); 
+                const response = await axios.post("http://127.0.0.1:8000/api/register", values); 
                 console.log("Kayıt başarılı:", response.data);
+                navigate('/student-panel'); 
             } catch (error) {
-                console.error("Kayıt sırasında hata oluştu:", error.response || error.message);
+                console.error("Kayıt sırasında hata oluştu:", error.response ? error.response.data : error.message);
             }
         }
     });
@@ -94,18 +99,21 @@ function Studentregister() {
                 {formik.errors.passwordagain && formik.touched.passwordagain && (
                     <div className={styles.errorMessage}>{formik.errors.passwordagain}</div>
                 )}
-
-          
-                <input
-                    type="text"
-                    name="className" 
-                    placeholder="Class"
-                    value={formik.values.className}
+                <select
+                    name="role"
+                    value={formik.values.role}
                     onChange={formik.handleChange}
                     className={styles.input}
-                />
-                {formik.errors.className && formik.touched.className && (
-                    <div className={styles.errorMessage}>{formik.errors.className}</div>
+                >
+                    <option value="">Select Role</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                </select>
+                {formik.errors.role && formik.touched.role && (
+                    <div className={styles.errorMessage}>{formik.errors.role}</div>
+                )}
+                {formik.errors.passwordagain && formik.touched.passwordagain && (
+                    <div className={styles.errorMessage}>{formik.errors.passwordagain}</div>
                 )}
 
                 <button type="submit" className={styles.button}>Register</button>

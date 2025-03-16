@@ -16,7 +16,7 @@ function Login() {
     validationSchema: Loginyup,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('http://your-api-url/api/login', {
+        const response = await axios.post('api/login', {
           email: values.email,
           password: values.password,
         });
@@ -25,7 +25,7 @@ function Login() {
         if (token) {
           localStorage.setItem('token', token);
 
-          if (role === 'teacher') {
+          if (role === 'Teacher') {
             navigate('/teacher-panel');  
           } else {
             navigate('/student-panel'); 
