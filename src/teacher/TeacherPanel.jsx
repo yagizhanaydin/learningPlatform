@@ -53,13 +53,13 @@ function TeacherPanel() {
         });
 
         console.log("Başarılı:", response.data);
-        alert("Kitap başarıyla eklendi!");
+        alert("ILAN başarıyla eklendi!");
 
         resetForm();
         setVideoFile(null);
       } catch (error) {
         console.error("Hata oluştu:", error.response?.data || error.message);
-        alert("Kitap eklenirken bir hata oluştu.");
+        alert("Ilan eklenirken bir hata oluştu.");
       }
     },
   });
