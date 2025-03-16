@@ -42,13 +42,4 @@ export const newvideo = yup.object({
   lesson: yup
     .string("Ders bir metin olmalı")
     .required("Ders zorunludur"),
-  video: yup
-    .mixed()
-    .required("Video dosyası yüklenmelidir.")
-    .test("fileSize", "Video boyutu 10MB'den küçük olmalıdır", (value) => {
-      return value && value.size <= 100 * 1024 ; 
-    })
-    .test("fileType", "Geçerli bir video formatı olmalıdır", (value) => {
-      return value && ["video/mp4", "video/webm", "video/ogg"].includes(value.type);
-    }),
 });
