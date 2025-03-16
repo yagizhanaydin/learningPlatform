@@ -14,7 +14,7 @@ function Studentregister() {
             passwordagain: "",
             className: ""
         },
-        validationSchema: StudentRegisteryup, 
+        validationSchema:StudentRegisteryup, 
         onSubmit: async (values) => {  
             try {
                 const response = await axios.post("/api/login", values); 
