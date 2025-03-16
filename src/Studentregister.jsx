@@ -16,7 +16,9 @@ function Studentregister() {
             passwordagain: "",
             role:""
         },
-       validationSchema: StudentRegisteryup, 
+
+        validationSchema:StudentRegisteryup, 
+
         onSubmit: async (values) => {  
             try {
                 const response = await axios.post("http://127.0.0.1:8000/api/register", values); 
