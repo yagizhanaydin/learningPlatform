@@ -57,7 +57,7 @@ function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit}>
       <CardElement />
-      {error && <div className="error">{error}</div>}  {/* Hata mesajı */}
+      {error && <div className="error">{error}</div>}  
       <button type="submit" disabled={!stripe || loading}>
         {loading ? 'Yükleniyor...' : 'Ödeme Yap'}
       </button>
