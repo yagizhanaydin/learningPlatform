@@ -7,6 +7,8 @@ import TeacherPanel from './teacher/TeacherPanel';
 import CheckoutForm from './proporties/CheckoutForm'; 
 import Help from './Help';
 import StudentPanel from './student/StudentPanel'
+import Admin from './admin/Admin';
+import Settings from './student/Settings';
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
         <Route path="/payment" element={<CheckoutForm />} /> 
       <Route path="/help" element={<Help/>}/>
       <Route path="/studentpanel" element={<StudentPanel/>}/>
+      <Route path="adminpanel" element={<Admin/>}/>
+      <Route path="/setting" element={<Settings/>}/>
       </Routes>
     </Router>
   );

@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { CiSettings } from "react-icons/ci";
 
 function StudentPanel() {
   const navigate = useNavigate();
   const [studentData, setStudentData] = useState(null);
   const [datedata, setDatedata] = useState(null);
 
+  // Öğrenci kontrol işlemi (role kontrolü)
+  /*
+  useEffect(() => {
+    const studentControl = () => {
+      const token = localStorage.getItem('token');
+      const role = localStorage.getItem('role');
+      if (role !== 'student') {
+        navigate('/login');
+      }
+    };
 
-//studentcontroller
-
-useEffect(() => {
-  const studentControl = () => {
-    const token = localStorage.getItem('token');
-    const role = localStorage.getItem('role');
-    if (role !== 'student') {
-      navigate('/login');
-    }
-  };
-
-  studentControl();
-}, [navigate]);
+    studentControl();
+  }, [navigate]);
+  */
 
   // Öğrenci verilerini getirme
   const getStudentData = async () => {
@@ -47,12 +48,16 @@ useEffect(() => {
     getLessonDate();
   }, []);
 
-  //student çıkış işlemi
-const studentcikdisari=()=>{
-  localStorage.removeItem('token');
-  navigate("/login")
-}
+  // Öğrenci çıkış işlemi
+  const studentcikdisari = () => {
+    localStorage.removeItem('token');
+    navigate("/login");
+  };
 
+  // Ayarlar sayfasına gitme
+  const settingsgo = () => {
+    navigate("/setting");
+  };
 
   return (
     <div>
@@ -77,7 +82,7 @@ const studentcikdisari=()=>{
 
       {/* Ders bilgileri gösterme */}
       <h2>Ders Randevuları</h2>
-      {datedata ? (
+      {datedata && Array.isArray(datedata) ? (
         <ul>
           {datedata.map((lesson, index) => (
             <li key={index}>
@@ -89,7 +94,9 @@ const studentcikdisari=()=>{
       ) : (
         <p>Ders verileri yükleniyor...</p>
       )}
+
       <button type="button" onClick={studentcikdisari}>LogOut</button>
+      <CiSettings type="button" onClick={settingsgo} title="settings" />
     </div>
   );
 }
