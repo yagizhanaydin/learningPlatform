@@ -19,7 +19,6 @@ export const StudentRegisteryup = yup.object({
     .string()
     .oneOf([yup.ref("password")], "Şifreler eşleşmiyor")
     .required("Şifre tekrar boş geçilemez"),
-  className: yup
+  role1: yup
     .string()
-    .required("Sınıf boş geçilemez")
 });
