@@ -5,32 +5,30 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);  // Hata durumunu kontrol etmek için
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      return; // Stripe henüz yüklenmediyse işlem yapılmaz
+      return;
     }
 
     setLoading(true);
 
     const cardElement = elements.getElement(CardElement);
 
-    // Stripe ödeme isteği gönderme
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     });
 
     if (error) {
-      setError(error.message);  // Hata mesajını göster
+      setError(error.message);
       setLoading(false);
     } else {
-      // Ödeme metodunu backend'e gönder
       try {
-        const response = await fetch('/your-backend-endpoint', {
+        const response = await fetch('http://127.0.0.1:8000/api/checkout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -41,10 +39,9 @@ function CheckoutForm() {
         const paymentResult = await response.json();
 
         if (paymentResult.error) {
-          setError(paymentResult.error);  // Backend'den gelen hatayı göster
+          setError(paymentResult.error);
         } else {
-          // Ödeme başarılı
-          console.log('Ödeme başarılı', paymentResult);
+          window.location.href = paymentResult.success_url;
         }
       } catch (err) {
         setError('Bir hata oluştu. Lütfen tekrar deneyin.');
@@ -57,7 +54,7 @@ function CheckoutForm() {
   return (
     <form onSubmit={handleSubmit}>
       <CardElement />
-      {error && <div className="error">{error}</div>}  
+      {error && <div className="error">{error}</div>}
       <button type="submit" disabled={!stripe || loading}>
         {loading ? 'Yükleniyor...' : 'Ödeme Yap'}
       </button>
