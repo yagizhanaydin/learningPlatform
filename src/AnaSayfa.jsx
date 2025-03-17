@@ -14,7 +14,7 @@ function AnaSayfa() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/lesson')
+    axios.get('http://localhost:8000/api/adverts')
       .then(response => {
         setUrunler(response.data);
         setYukleniyor(false);
@@ -95,6 +95,12 @@ function AnaSayfa() {
               <p><strong>Meslek:</strong> {urun.profession}</p>
               <p><strong>Konum:</strong> {urun.location}</p>
               <p><strong>Ders:</strong> {urun.lesson}</p>
+              {urun.video_url && (
+    <video width="320" height="240" controls>
+      <source src={urun.video_url} type="video/mp4" />
+      Tarayıcınız video etiketini desteklemiyor.
+    </video>
+  )}
               <button onClick={() => sepeteEkle(urun)}>
                 Sepete Ekle
               </button>
