@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import styles from '../assets/payment.module.css'
 
 function CheckoutForm() {
   const stripe = useStripe();
@@ -52,13 +53,15 @@ function CheckoutForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.formContainer} onSubmit={handleSubmit}>
+    <div className={styles.cardElementWrapper}>
       <CardElement />
-      {error && <div className="error">{error}</div>}
-      <button type="submit" disabled={!stripe || loading}>
-        {loading ? 'Yükleniyor...' : 'Ödeme Yap'}
-      </button>
-    </form>
+    </div>
+    {error && <div className={styles.error}>{error}</div>}
+    <button className={styles.submitButton} type="submit" disabled={!stripe || loading}>
+      {loading ? 'Yükleniyor...' : 'Ödeme Yap'}
+    </button>
+  </form>
   );
 }
 
