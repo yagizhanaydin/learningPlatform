@@ -3,10 +3,10 @@ import * as yup from "yup";
 export const Loginyup = yup.object({
   email: yup
     .string() 
-    .email("Email türünde olmalı")
-    .required("Email boş geçilemez"),
+    .email("Provide your e-mail")
+    .required("Email cannot be left blank"),
   password: yup
     .string()
-    .required("Şifre boş geçilemez")
-    .min(6, "Şifre en az 6 karakter olmalı"),
+    .required("Enter your password")
+    .min(6, "Password must be at least 6 characters"),
 });

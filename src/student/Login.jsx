@@ -32,7 +32,7 @@ function Login() {
           }
         }
       } catch (error) {
-        console.error('Giriş sırasında hata oluştu:', error);
+        console.error('Error:', error);
       }
     },
   });
@@ -40,7 +40,7 @@ function Login() {
   return (
     <div className={styles['login-container']}>
       <div className={styles['login-box']}>
-        <h2 className={styles['login-title']}>Giriş Yap</h2>
+        <h2 className={styles['login-title']}>LOGIN</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className={styles['input-group']}>
             <input
@@ -61,7 +61,7 @@ function Login() {
               type="password"
               name="password"
               className={styles['input-field']}
-              placeholder="Şifre"
+              placeholder="Password"
               value={formik.values.password}
               onChange={formik.handleChange}
             />
@@ -70,7 +70,7 @@ function Login() {
             )}
           </div>
 
-          <button type="submit" className={styles['submit-button']}>Giriş Yap</button>
+          <button type="submit" className={styles['submit-button']}>LOGIN</button>
         </form>
       </div>
     </div>

@@ -3,22 +3,22 @@ import * as yup from "yup";
 export const StudentRegisteryup = yup.object({
   email: yup
     .string()
-    .email("Email türünde olmalı")
-    .required("Email boş geçilemez"),
+    .email("Provide your e-mail")
+    .required("Cannot left blank"),
   name: yup
     .string()
-    .required("İsim boş geçilemez"),
+    .required("Cannot left blank"),
   surname: yup
     .string()
-    .required("Soyisim boş geçilemez"),
+    .required("Cannot left blank"),
   password: yup
     .string()
-    .required("Şifre boş geçilemez")
-    .min(6, "Şifre en az 6 karakter olmalı"),
+    .required("Cannot left blank")
+    .min(6, "Password must be at least 6 characters"),
   passwordagain: yup
     .string()
-    .oneOf([yup.ref("password")], "Şifreler eşleşmiyor")
-    .required("Şifre tekrar boş geçilemez"),
+    .oneOf([yup.ref("password")], "Passwords do not match")
+    .required("Cannot left blank"),
   role1: yup
     .string()
 });

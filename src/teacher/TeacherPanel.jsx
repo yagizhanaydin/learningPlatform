@@ -52,14 +52,14 @@ function TeacherPanel() {
           },
         });
 
-        console.log("Başarılı:", response.data);
-        alert("ILAN başarıyla eklendi!");
+        console.log("Success:", response.data);
+        alert("Advert added successfully!");
 
         resetForm();
         setVideoFile(null);
       } catch (error) {
-        console.error("Hata oluştu:", error.response?.data || error.message);
-        alert("Ilan eklenirken bir hata oluştu.");
+        console.error("Error:", error.response?.data || error.message);
+        alert("Error while adding a advert.");
       }
     },
   });
@@ -112,7 +112,7 @@ function TeacherPanel() {
       });
       console.log(ilangetirme.data);
     } catch (error) {
-      console.error("İlan getirme hatası: ", error);
+      console.error("Error: ", error);
     }
   };
 
@@ -123,16 +123,16 @@ function TeacherPanel() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Teacher Panel</h1>
-      <h2 className={styles.teacherstyle}>Öğretmen Bilgileri</h2>
+      <h2 className={styles.teacherstyle}>Teacher Information</h2>
       <div className={styles.teacherInfo}>
         {teacherData ? (
           <ul>
-            <li><strong>Ad:</strong> {teacherData.name}</li>
-            <li><strong>E-posta:</strong> {teacherData.email}</li>
-            <li><strong>Branş:</strong> {teacherData.branch}</li>
+            <li><strong>Name:</strong> {teacherData.name}</li>
+            <li><strong>E-mail:</strong> {teacherData.email}</li>
+            <li><strong>Profession:</strong> {teacherData.branch}</li>
           </ul>
         ) : (
-          <p>Bilgiler yükleniyor...</p>
+          <p>Loading...</p>
         )}
       </div>
       <IoLogOutOutline onClick={teachertokendelete} className={styles.logoutIcon} />
@@ -140,14 +140,14 @@ function TeacherPanel() {
 
       <div>
         <h3 className={styles.formTitle} onClick={() => setShowForm(!showForm)}>
-          Yeni İlan Ekle <MdFormatListBulletedAdd className={styles.toggleIcon} />
+          Add new Advert <MdFormatListBulletedAdd className={styles.toggleIcon} />
         </h3>
         {showForm && (
           <form onSubmit={formik.handleSubmit} className={styles.formContainer}>
             <input
               type="text"
               name="title"
-              placeholder="Başlık"
+              placeholder="Title"
               value={formik.values.title}
               onChange={formik.handleChange}
             />
@@ -157,7 +157,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="description"
-              placeholder="Açıklama"
+              placeholder="Description"
               value={formik.values.description}
               onChange={formik.handleChange}
             />
@@ -167,7 +167,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="price"
-              placeholder="Fiyat"
+              placeholder="Price"
               value={formik.values.price}
               onChange={formik.handleChange}
             />
@@ -177,7 +177,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="profession"
-              placeholder="Branş"
+              placeholder="Profession"
               value={formik.values.profession}
               onChange={formik.handleChange}
             />
@@ -187,7 +187,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="location"
-              placeholder="Lokasyon"
+              placeholder="Location"
               value={formik.values.location}
               onChange={formik.handleChange}
             />
@@ -197,7 +197,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="lesson"
-              placeholder="Ders"
+              placeholder="Lesson"
               value={formik.values.lesson}
               onChange={formik.handleChange}
             />
@@ -218,7 +218,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="title"
-              placeholder="Başlık"
+              placeholder="Title"
               value={secondformik.values.title}
               onChange={secondformik.handleChange}
             />
@@ -228,7 +228,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="description"
-              placeholder="Açıklama"
+              placeholder="Description"
               value={secondformik.values.description}
               onChange={secondformik.handleChange}
             />
@@ -238,7 +238,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="price"
-              placeholder="Fiyat"
+              placeholder="Price"
               value={secondformik.values.price}
               onChange={secondformik.handleChange}
             />
@@ -248,7 +248,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="profession"
-              placeholder="Branş"
+              placeholder="Profession"
               value={secondformik.values.profession}
               onChange={secondformik.handleChange}
             />
@@ -258,7 +258,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="location"
-              placeholder="Lokasyon"
+              placeholder="Location"
               value={secondformik.values.location}
               onChange={secondformik.handleChange}
             />
@@ -268,7 +268,7 @@ function TeacherPanel() {
             <input
               type="text"
               name="lesson"
-              placeholder="Ders"
+              placeholder="Lesson"
               value={secondformik.values.lesson}
               onChange={secondformik.handleChange}
             />
@@ -282,7 +282,7 @@ function TeacherPanel() {
               onChange={handleVideoChange}
             />
             {secondformik.errors.video_file && <div>{secondformik.errors.video_file}</div>}
-            <button type="submit">ILAN VER</button>
+            <button type="submit">Add Advert</button>
           </form>
         )}
       </div>

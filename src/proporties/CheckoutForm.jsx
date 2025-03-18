@@ -45,7 +45,7 @@ function CheckoutForm() {
           window.location.href = paymentResult.success_url;
         }
       } catch (err) {
-        setError('Bir hata oluştu. Lütfen tekrar deneyin.');
+        setError('Error. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -59,7 +59,7 @@ function CheckoutForm() {
     </div>
     {error && <div className={styles.error}>{error}</div>}
     <button className={styles.submitButton} type="submit" disabled={!stripe || loading}>
-      {loading ? 'Yükleniyor...' : 'Ödeme Yap'}
+      {loading ? 'Loading...' : 'Make Payment'}
     </button>
   </form>
   );
