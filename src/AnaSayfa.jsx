@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { SlBasket } from "react-icons/sl";
 import { useNavigate } from 'react-router-dom';
+import styles from './AnaSayfa.module.css'; // CSS modülünü import ediyoruz
 
 function AnaSayfa() {
   const [aramaTerimi, setAramaTerimi] = useState('');
@@ -9,7 +10,7 @@ function AnaSayfa() {
   const [yukleniyor, setYukleniyor] = useState(true);
   const [hata, setHata] = useState(null);
   const [sepet, setSepet] = useState([]);
-  const [siralamaDizisi, setSiralamaDizisi] = useState('none'); 
+  const [siralamaDizisi, setSiralamaDizisi] = useState('none');
 
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ function AnaSayfa() {
         setYukleniyor(false);
       });
   }, []);
-//sepetteki ürünleri kaydetme
+
   useEffect(() => {
     const saklananSepet = JSON.parse(localStorage.getItem("cart")) || [];
     setSepet(saklananSepet);
@@ -51,76 +52,84 @@ function AnaSayfa() {
       urun.title.toLowerCase().includes(aramaTerimi.toLowerCase())
     )
   );
-//sepete yönlendirme
+
   const sepeteGit = () => {
     navigate("/sepet");
   };
 
-  // Sepete ekler
   const sepeteEkle = (urun) => {
     const mevcutSepet = JSON.parse(localStorage.getItem("cart")) || [];
     const guncellenmisSepet = [...mevcutSepet, urun];
 
     localStorage.setItem("cart", JSON.stringify(guncellenmisSepet));
-    setSepet(guncellenmisSepet); // Sepet durumunu güncelle
+    setSepet(guncellenmisSepet);
   };
 
   return (
-    <>
-      {yukleniyor && <p>Yükleniyor...</p>}
-      {hata && <p>{hata}</p>}
-      
-      <div>
+    <div className={styles.container}>
+      {/* Navbar */}
+      <nav className={styles.navbar}>
+        <div className={styles.navbarLogo} onClick={() => navigate("/")}>
+          Tutor Finder
+        </div>
+        <div className={styles.navbarLinks}>
+          <span onClick={() => navigate("/")}>Home</span>
+          <span onClick={() => navigate("/hakkimizda")}>About Us!</span>
+          <span onClick={() => navigate("/iletisim")}>Contact Us!</span>
+        </div>
+        <div className={styles.navbarSepet} onClick={sepeteGit}>
+          <SlBasket title='Cart' size={20} />
+          {sepet.length > 0 && (
+            <span className={styles.sepetSayisi}>{sepet.length}</span>
+          )}
+        </div>
+      </nav>
+
+      {yukleniyor && <p className={styles.yukleniyor}>Loading...</p>}
+      {hata && <p className={styles.hata}>{hata}</p>}
+
+      <div className={styles.aramaVeSiralama}>
         <input
           type="text"
-          placeholder="Sana Uygun Dersi Ara"
+          placeholder="Find Tutors"
           value={aramaTerimi}
           onChange={aramaYap}
+          className={styles.aramaInput}
         />
 
-        <select onChange={siralamaDegistir} value={siralamaDizisi}>
-          <option value="none">Sıralama Seç</option>
-          <option value="lowToHigh">Ucuzdan Pahalıya</option>
-          <option value="highToLow">Pahalıdan Ucuza</option>
+        <select onChange={siralamaDegistir} value={siralamaDizisi} className={styles.siralamaSelect}>
+          <option value="none">Filter</option>
+          <option value="lowToHigh">Price: Low to High</option>
+          <option value="highToLow">Price: High to Low</option>
         </select>
       </div>
 
-      <div>
+      <div className={styles.urunlerGrid}>
         {filtrelenmisUrunler.length > 0 ? (
           filtrelenmisUrunler.map(urun => (
-            <div key={urun.id}>
+            <div key={urun.id} className={styles.urunKarti}>
               <h3>{urun.title}</h3>
               <p>{urun.description}</p>
-              <p><strong>Fiyat:</strong> {Math.round(urun.price)}₺</p>
-              <p><strong>Meslek:</strong> {urun.profession}</p>
-              <p><strong>Konum:</strong> {urun.location}</p>
-              <p><strong>Ders:</strong> {urun.lesson}</p>
+              <p><strong>Price:</strong> {Math.round(urun.price)}₺</p>
+              <p><strong>Profession:</strong> {urun.profession}</p>
+              <p><strong>Location:</strong> {urun.location}</p>
+              <p><strong>Lesson:</strong> {urun.lesson}</p>
               {urun.video_url && (
-    <video width="320" height="240" controls>
-      <source src={urun.video_url} type="video/mp4" />
-      Tarayıcınız video etiketini desteklemiyor.
-    </video>
-  )}
-              <button onClick={() => sepeteEkle(urun)}>
-                Sepete Ekle
+                <video controls className={styles.urunVideo}>
+                  <source src={urun.video_url} type="video/mp4" />
+                  Your browser doesn't support this video.
+                </video>
+              )}
+              <button onClick={() => sepeteEkle(urun)} className={styles.sepeteEkleButon}>
+                Add to Cart
               </button>
             </div>
           ))
         ) : (
-          <p>Aradığınız ders bulunamadı.</p>
+          <p className={styles.urunBulunamadi}>We couldn't find anything.</p>
         )}
       </div>
-
-      {/* Sepete gitme butonu */}
-      <div>
-        {sepet.length > 0 && (
-          <div>
-            <SlBasket onClick={sepeteGit} title='Sepet' size={30} />
-            <span>{sepet.length}</span>
-          </div>
-        )}
-      </div>
-    </>
+    </div>
   );
 }
 

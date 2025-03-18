@@ -39,7 +39,7 @@ function StudentPanel() {
       const response = await axios.get("/api/lesson");
       setDatedata(response.data); // Dersleri state'e kaydet
     } catch (error) {
-      console.error("Dersler getirilemedi:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -67,32 +67,32 @@ function StudentPanel() {
       {studentData ? (
         <div>
           <p>
-            <strong>Ad:</strong> {studentData.name}
+            <strong>Name:</strong> {studentData.name}
           </p>
           <p>
-            <strong>Soyad:</strong> {studentData.surname}
+            <strong>Surname:</strong> {studentData.surname}
           </p>
           <p>
             <strong>Email:</strong> {studentData.email}
           </p>
         </div>
       ) : (
-        <p>Veriler yükleniyor...</p>
+        <p>Loading Data...</p>
       )}
 
       {/* Ders bilgileri gösterme */}
-      <h2>Ders Randevuları</h2>
+      <h2>Tutors</h2>
       {datedata && Array.isArray(datedata) ? (
         <ul>
           {datedata.map((lesson, index) => (
             <li key={index}>
-              <strong>Ders:</strong> {lesson.name} -{" "}
-              <strong>Tarih:</strong> {lesson.date}
+              <strong>Lesson:</strong> {lesson.name} -{" "}
+              <strong>Date:</strong> {lesson.date}
             </li>
           ))}
         </ul>
       ) : (
-        <p>Ders verileri yükleniyor...</p>
+        <p>Loading Data...</p>
       )}
 
       <button type="button" onClick={studentcikdisari}>LogOut</button>

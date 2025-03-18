@@ -27,21 +27,21 @@ function Sepet() {
 
   return (
     <>
-      <h2>Sepetiniz</h2>
+      <h2>Cart</h2>
       {urunler.length > 0 ? (
         <>
           {urunler.map(urun => (
             <div key={urun.id}>
               <h3>{urun.title}</h3>
               <p>{urun.description}</p>
-              <p><strong>Fiyat:</strong> {urun.price.toFixed(2)}₺</p>
-              <button onClick={() => handleRemoveFromCart(urun.id)}>Sepetten Çıkar</button>
+              <p><strong>Price:</strong> {urun.price.toFixed(2)}₺</p>
+              <button onClick={() => handleRemoveFromCart(urun.id)}>Remove from cart</button>
             </div>
           ))}
-          <button type="button" onClick={paypalegit}>Ödemeye Git</button>
+          <button type="button" onClick={paypalegit}>Pay</button>
         </>
       ) : (
-        <p>Sepetiniz boş.</p>
+        <p>Your cart is empty.</p>
       )}
     </>
   );

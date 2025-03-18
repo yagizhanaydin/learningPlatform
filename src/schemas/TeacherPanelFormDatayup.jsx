@@ -2,44 +2,44 @@ import * as yup from "yup";
 
 export const newilan = yup.object({
   title: yup
-    .string("Başlık bir metin olmalı")
-    .required("Başlık zorunludur"),
+    .string("Title must be a text")
+    .required("Title is mandatory"),
   description: yup
-    .string("Açıklama bir metin olmalı")
-    .required("Açıklama zorunludur"),
+    .string("Description must be a text")
+    .required("Description is mandatory"),
   price: yup
-    .string("Fiyat bir metin olmalı")
-    .required("Fiyat zorunludur"),
+    .string("Price must be a text")
+    .required("Price is mandatory"),
   profession: yup
-    .string("Branş bir metin olmalı")
-    .required("Branş zorunludur"),
+    .string("Profession must be a text")
+    .required("Profession is mandatory"),
   location: yup
-    .string("Lokasyon bir metin olmalı")
-    .required("Lokasyon zorunludur"),
+    .string("Location must be a text")
+    .required("Location is mandatory"),
   lesson: yup
-    .string("Ders bir metin olmalı")
-    .required("Ders zorunludur"),
+    .string("Lesson must be a text")
+    .required("Lesson is mandatory"),
 });
 
 
 
 export const newvideo = yup.object({
   title: yup
-    .string("Başlık bir metin olmalı")
-    .required("Başlık zorunludur"),
+    .string("Title must be a text")
+    .required("Title is mandatory"),
   description: yup
-    .string("Açıklama bir metin olmalı")
-    .required("Açıklama zorunludur"),
+    .string("Description must be a text")
+    .required("Description is mandatory"),
   price: yup
-    .string("Fiyat bir metin olmalı")
-    .required("Fiyat zorunludur"),
+    .string("Price must be a text")
+    .required("Price is mandatory"),
   profession: yup
-    .string("Branş bir metin olmalı")
-    .required("Branş zorunludur"),
+    .string("Profession must be a text")
+    .required("Profession is mandatory"),
   location: yup
-    .string("Lokasyon bir metin olmalı")
-    .required("Lokasyon zorunludur"),
+    .string("Location must be a text")
+    .required("Location is mandatory"),
   lesson: yup
-    .string("Ders bir metin olmalı")
-    .required("Ders zorunludur"),
+    .string("Lesson must be a text")
+    .required("Lesson is mandatory"),
 });
