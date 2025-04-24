@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './cart.css'
+import './cart.css';
 
 function Sepet() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Sepet() {
 
   const paypalegit = () => {
     if (urunler.length > 0) {
-      navigate("/payment");
+      navigate("/payment", { state: { totalAmount: calculateTotal() } });
     }
   };
 
@@ -40,9 +40,7 @@ function Sepet() {
   return (
     <div className="sepet-container">
       <div className="sepet-header">
-        <button onClick={goBack} className="back-button">
-          ← Back
-        </button>
+        <button onClick={goBack} className="back-button">← Back</button>
         <h2>🛒 Shopping Cart</h2>
       </div>
 
@@ -59,9 +57,7 @@ function Sepet() {
               <div key={urun.id} className="urun-item">
                 <div className="urun-bilgisi">
                   <div className="urun-resim">
-                    {urun.image && (
-                      <img src={urun.image} alt={urun.title} />
-                    )}
+                    {urun.image && <img src={urun.image} alt={urun.title} />}
                   </div>
                   <div className="urun-detay">
                     <h3>{urun.title}</h3>
@@ -70,12 +66,7 @@ function Sepet() {
                 </div>
                 <div className="urun-fiyat">{Number(urun.price).toFixed(2)}₺</div>
                 <div className="urun-aksiyon">
-                  <button
-                    onClick={() => handleRemoveFromCart(urun.id)}
-                    className="remove-button"
-                  >
-                    Remove
-                  </button>
+                  <button onClick={() => handleRemoveFromCart(urun.id)} className="remove-button">Remove</button>
                 </div>
               </div>
             ))}
@@ -97,12 +88,7 @@ function Sepet() {
                 <span>{calculateTotal()}₺</span>
               </div>
             </div>
-            <button
-              onClick={paypalegit}
-              className="checkout-button"
-            >
-              Proceed to Checkout
-            </button>
+            <button onClick={paypalegit} className="checkout-button">Proceed to Checkout</button>
           </div>
         </div>
       ) : (
@@ -110,12 +96,7 @@ function Sepet() {
           <div className="empty-icon">🛒</div>
           <h3>Your cart is empty</h3>
           <p>Looks like you haven't added any items to your cart yet.</p>
-          <button
-            onClick={goBack}
-            className="continue-button"
-          >
-            Continue Shopping
-          </button>
+          <button onClick={goBack} className="continue-button">Continue Shopping</button>
         </div>
       )}
     </div>

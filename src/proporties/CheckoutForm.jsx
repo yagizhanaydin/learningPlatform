@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import styles from '../assets/payment.module.css'
+import { useLocation } from 'react-router-dom';
+import styles from '../assets/payment.module.css';
 
 function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const location = useLocation();
+  const { totalAmount } = location.state || {};
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -34,7 +38,10 @@ function CheckoutForm() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ paymentMethodId: paymentMethod.id }),
+          body: JSON.stringify({
+            paymentMethodId: paymentMethod.id,
+            amount: parseFloat(totalAmount * 100)
+          }),
         });
 
         const paymentResult = await response.json();
@@ -54,14 +61,14 @@ function CheckoutForm() {
 
   return (
     <form className={styles.formContainer} onSubmit={handleSubmit}>
-    <div className={styles.cardElementWrapper}>
-      <CardElement />
-    </div>
-    {error && <div className={styles.error}>{error}</div>}
-    <button className={styles.submitButton} type="submit" disabled={!stripe || loading}>
-      {loading ? 'Loading...' : 'Make Payment'}
-    </button>
-  </form>
+      <div className={styles.cardElementWrapper}>
+        <CardElement />
+      </div>
+      {error && <div className={styles.error}>{error}</div>}
+      <button className={styles.submitButton} type="submit" disabled={!stripe || loading}>
+        {loading ? 'Loading...' : 'Make Payment'}
+      </button>
+    </form>
   );
 }
 
