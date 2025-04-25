@@ -24,6 +24,7 @@ function Login() {
         const { token, role } = response.data;
         if (token) {
           localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
 
           if (role === 'Teacher') {
             navigate('/');

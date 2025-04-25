@@ -105,6 +105,8 @@ function TeacherPanel() {
 
   const teachertokendelete = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("cart");
     navigate("/login");
   };
 

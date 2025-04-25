@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { SlBasket } from "react-icons/sl";
 import { useNavigate } from 'react-router-dom';
-import styles from './AnaSayfa.module.css'; // CSS modülünü import ediyoruz
+import styles from './AnaSayfa.module.css';
 
 function AnaSayfa() {
   const [aramaTerimi, setAramaTerimi] = useState('');
@@ -11,6 +11,8 @@ function AnaSayfa() {
   const [hata, setHata] = useState(null);
   const [sepet, setSepet] = useState([]);
   const [siralamaDizisi, setSiralamaDizisi] = useState('none');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState(null);
 
   const navigate = useNavigate();
 
@@ -29,6 +31,17 @@ function AnaSayfa() {
   useEffect(() => {
     const saklananSepet = JSON.parse(localStorage.getItem("cart")) || [];
     setSepet(saklananSepet);
+
+    const token = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+
+    if (token) {
+      setIsLoggedIn(true);
+    }
+
+    if (storedRole) {
+      setRole(storedRole);
+    }
   }, []);
 
   const aramaYap = (e) => {
@@ -76,13 +89,25 @@ function AnaSayfa() {
           <span onClick={() => navigate("/")}>Home</span>
           <span onClick={() => navigate("/hakkimizda")}>About Us!</span>
           <span onClick={() => navigate("/iletisim")}>Contact Us!</span>
-        </div>
-        <div className={styles.navbarSepet} onClick={sepeteGit}>
-          <SlBasket title='Cart' size={20} />
-          {sepet.length > 0 && (
-            <span className={styles.sepetSayisi}>{sepet.length}</span>
+
+          {!isLoggedIn && (
+            <>
+              <span onClick={() => navigate("/login")}>Login</span>
+              <span onClick={() => navigate("/register")}>Register</span>
+            </>
+          )}
+          {isLoggedIn && role === 'Teacher' && (
+            <span onClick={() => navigate("/teacherpanel")}>Teacher Panel</span>
           )}
         </div>
+        {isLoggedIn && (
+          <div className={styles.navbarSepet} onClick={sepeteGit}>
+            <SlBasket title='Cart' size={20} />
+            {sepet.length > 0 && (
+              <span className={styles.sepetSayisi}>{sepet.length}</span>
+            )}
+          </div>
+        )}
       </nav>
 
       {yukleniyor && <p className={styles.yukleniyor}>Loading...</p>}
