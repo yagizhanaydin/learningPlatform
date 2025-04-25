@@ -20,7 +20,8 @@
 }
 
 /* Logout ve Chat butonları */
-.logoutIcon, .chatIcon {
+.logoutIcon,
+.chatIcon {
   font-size: 42px;
   cursor: pointer;
   position: absolute;
@@ -42,7 +43,8 @@
   color: #007bff;
 }
 
-.logoutIcon:hover, .chatIcon:hover {
+.logoutIcon:hover,
+.chatIcon:hover {
   transform: scale(1.15);
 }
 
@@ -128,20 +130,93 @@ form button:hover {
 /* Responsive (Mobil uyumluluk) */
 @media screen and (max-width: 600px) {
   .container {
-      width: 95%;
-      padding: 15px;
+    width: 95%;
+    padding: 15px;
   }
 
-  .logoutIcon, .chatIcon {
-      font-size: 34px;
-      padding: 8px;
+  .logoutIcon,
+  .chatIcon {
+    font-size: 34px;
+    padding: 8px;
   }
 
   .formContainer {
-      width: 100%;
+    width: 100%;
   }
 
   .formTitle {
-      font-size: 20px;
+    font-size: 20px;
   }
+}
+
+.advertsContainer {
+  margin-bottom: 2rem;
+}
+
+.advertsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.advertCard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.advertCard:hover {
+  transform: translateY(-5px);
+}
+
+.advertCard h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.advertCard p {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.advertDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.videoIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: #4a6bdf;
+  font-size: 0.9rem;
+}
+
+.advertHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.deleteButton:hover {
+  color: #cc0000;
 }
