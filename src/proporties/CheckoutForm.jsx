@@ -49,6 +49,7 @@ function CheckoutForm() {
         if (paymentResult.error) {
           setError(paymentResult.error);
         } else {
+          localStorage.removeItem("cart");
           window.location.href = paymentResult.success_url;
         }
       } catch (err) {
@@ -59,11 +60,15 @@ function CheckoutForm() {
     }
   };
 
+
+
   return (
+
     <form className={styles.formContainer} onSubmit={handleSubmit}>
       <div className={styles.cardElementWrapper}>
         <CardElement />
       </div>
+      <div className={styles.cardElementWrapper}>₺{totalAmount}</div>
       {error && <div className={styles.error}>{error}</div>}
       <button className={styles.submitButton} type="submit" disabled={!stripe || loading}>
         {loading ? 'Loading...' : 'Make Payment'}

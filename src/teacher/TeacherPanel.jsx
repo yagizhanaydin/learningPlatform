@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { IoLogOutOutline, IoChatboxEllipsesOutline, IoTrashOutline } from "react-icons/io5";
+import { IoLogOutOutline, IoChatboxEllipsesOutline, IoTrashOutline, IoHome } from "react-icons/io5";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import { useFormik } from 'formik';
 import { newilan, newvideo } from '../schemas/TeacherPanelFormDatayup';
@@ -109,15 +109,20 @@ function TeacherPanel() {
     localStorage.removeItem("cart");
     navigate("/login");
   };
+  const goHome = () => {
+    navigate("/");
+  };
 
   const chatgo = () => {
     navigate("/chat");
   };
 
   return (
+
     <div className={styles.container}>
       <IoLogOutOutline onClick={teachertokendelete} className={styles.logoutIcon} />
       <IoChatboxEllipsesOutline onClick={chatgo} className={styles.chatIcon} />
+      <IoHome onClick={goHome}>HOME</IoHome>
 
       <div className={styles.advertsContainer}>
         <h2>My Adverts</h2>

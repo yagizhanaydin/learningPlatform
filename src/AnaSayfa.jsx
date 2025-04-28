@@ -110,8 +110,7 @@ function AnaSayfa() {
         )}
       </nav>
 
-      {yukleniyor && <p className={styles.yukleniyor}>Loading...</p>}
-      {hata && <p className={styles.hata}>{hata}</p>}
+
 
       <div className={styles.aramaVeSiralama}>
         <input
@@ -128,7 +127,8 @@ function AnaSayfa() {
           <option value="highToLow">Price: High to Low</option>
         </select>
       </div>
-
+      {yukleniyor && <p className={styles.yukleniyor}>Loading...</p>}
+      {hata && <p className={styles.hata}>{hata}</p>}
       <div className={styles.urunlerGrid}>
         {filtrelenmisUrunler.length > 0 ? (
           filtrelenmisUrunler.map(urun => (

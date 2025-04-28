@@ -1,12 +1,12 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import axios from 'axios';  
-import { useNavigate } from 'react-router-dom';  
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { StudentRegisteryup } from './schemas/StudentRegisteryup';
 import styles from './assets/StudentRegister.module.css'; // CSS modülünü dahil ettik
 
 function Studentregister() {
-  const navigate = useNavigate();  
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -14,18 +14,18 @@ function Studentregister() {
             surname: "",
             password: "",
             passwordagain: "",
-            role:""
+            role: ""
         },
 
-        validationSchema:StudentRegisteryup, 
+        validationSchema: StudentRegisteryup,
 
-        onSubmit: async (values) => {  
+        onSubmit: async (values) => {
             try {
-                const response = await axios.post("http://127.0.0.1:8000/api/register", values); 
-                console.log("Kayıt başarılı:", response.data);
-                navigate('/student-panel'); 
+                const response = await axios.post("http://127.0.0.1:8000/api/register", values);
+                console.log("Successfuly registerd!:", response.data);
+                navigate('/');
             } catch (error) {
-                console.error("Kayıt sırasında hata oluştu:", error.response ? error.response.data : error.message);
+                console.error("Error while registering:", error.response ? error.response.data : error.message);
             }
         }
     });
@@ -35,7 +35,7 @@ function Studentregister() {
             <form onSubmit={formik.handleSubmit} className={styles.form}>
                 <h1>Register</h1>
 
-        
+
                 <input
                     type="email"
                     name="email"
@@ -48,9 +48,9 @@ function Studentregister() {
                     <div className={styles.errorMessage}>{formik.errors.email}</div>
                 )}
 
-           
-                <input 
-                    type="text" 
+
+                <input
+                    type="text"
                     name="name"
                     placeholder="Name"
                     value={formik.values.name}
@@ -61,7 +61,7 @@ function Studentregister() {
                     <div className={styles.errorMessage}>{formik.errors.name}</div>
                 )}
 
-           
+
                 <input
                     type="text"
                     name="surname"
@@ -74,8 +74,8 @@ function Studentregister() {
                     <div className={styles.errorMessage}>{formik.errors.surname}</div>
                 )}
 
-              
-                <input 
+
+                <input
                     type="password"
                     name="password"
                     placeholder="Password"
@@ -87,8 +87,8 @@ function Studentregister() {
                     <div className={styles.errorMessage}>{formik.errors.password}</div>
                 )}
 
-           
-                <input 
+
+                <input
                     type="password"
                     name="passwordagain"
                     placeholder="Confirm Password"
