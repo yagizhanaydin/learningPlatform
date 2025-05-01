@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom';
 import { Loginyup } from '../schemas/Loginyup';
-import styles from '../assets/login.module.css';  
+import styles from '../assets/login.module.css';
 
 function Login() {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -24,11 +24,12 @@ function Login() {
         const { token, role } = response.data;
         if (token) {
           localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
 
           if (role === 'Teacher') {
-            navigate('/teacher-panel');  
+            navigate('/');
           } else {
-            navigate('/student-panel'); 
+            navigate('/');
           }
         }
       } catch (error) {
