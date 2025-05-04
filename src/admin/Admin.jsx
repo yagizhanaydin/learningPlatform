@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import styles from '../assets/Admin.module.css';
 
+=======
+>>>>>>> 100a2b7dcc8200b9c91c54a1ccdda443718553ea
 
 function Admin() {
     const [teacherData, setTeacherData] = useState([]);
@@ -98,6 +101,7 @@ function Admin() {
     };
 
     return (
+<<<<<<< HEAD
         <div className={styles.container}>
             <div className={styles.buttonGroup}>
                 <button className={styles.button} onClick={getStudentData}>Öğrencileri Getir</button>
@@ -146,6 +150,57 @@ function Admin() {
                             <p><strong>Ders:</strong> {ilan.lesson}</p>
                         </div>
                     ))}
+=======
+        <div>
+            <button onClick={getStudentData}>Öğrencileri Getir</button>
+            <button onClick={getTeacherData}>Öğretmenleri Getir</button>
+            <button onClick={getIlan}>İlanları Getir</button>
+            <button onClick={adminLogout}>Çıkış Yap</button>
+            <button onClick={deleteData}>Verileri Sil</button>
+            
+            {activeTab === "students" && (
+                <>
+                    <h2>Öğrenciler</h2>
+                    <ul>
+                        {studentData.length > 0 ? (
+                            studentData.map((student, index) => (
+                                <li key={index}>{JSON.stringify(student)}</li>
+                            ))
+                        ) : (
+                            <p>Öğrenci verisi yok.</p>
+                        )}
+                    </ul>
+                </>
+            )}
+            
+            {activeTab === "teachers" && (
+                <>
+                    <h2>Öğretmenler</h2>
+                    <ul>
+                        {teacherData.length > 0 ? (
+                            teacherData.map((teacher, index) => (
+                                <li key={index}>{JSON.stringify(teacher)}</li>
+                            ))
+                        ) : (
+                            <p>Öğretmen verisi yok.</p>
+                        )}
+                    </ul>
+                </>
+            )}
+            
+            {activeTab === "ilan" && (
+                <>
+                    <h2>İlanlar</h2>
+                    <ul>
+                        {ilanData.length > 0 ? (
+                            ilanData.map((ilan, index) => (
+                                <li key={index}>{JSON.stringify(ilan)}</li>
+                            ))
+                        ) : (
+                            <p>İlan verisi yok.</p>
+                        )}
+                    </ul>
+>>>>>>> 100a2b7dcc8200b9c91c54a1ccdda443718553ea
                 </>
             )}
         </div>
