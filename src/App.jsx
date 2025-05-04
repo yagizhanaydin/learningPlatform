@@ -32,7 +32,7 @@ function AppRoutes() {
       } else if (role === 'student' && window.location.pathname === '/studentpanel') {
         navigate('/'); // Öğrenci rolü varsa ve /studentpanel'de ise ana sayfaya yönlendir
       } else if (role === 'admin' && window.location.pathname === '/adminpanel') {
-        navigate('/'); // Admin rolü varsa ve /adminpanel'de ise ana sayfaya yönlendir
+        navigate('/adminpanel'); // Admin rolü varsa ve /adminpanel'de ise ana sayfaya yönlendir
       } else if (window.location.pathname === '/login' || window.location.pathname === '/register') {
         navigate('/'); // Token varsa login ve register sayfalarına girişi engelle
       }

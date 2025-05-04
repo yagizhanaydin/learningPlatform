@@ -1,154 +1,202 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { Users, BarChart3, LogOut, Loader2 } from 'lucide-react';
+import './admin.css';
 import { useNavigate } from 'react-router-dom';
 
-function Admin() {
-    const [teacherData, setTeacherData] = useState([]);
-    const [studentData, setStudentData] = useState([]);
-    const [ilanData, setIlanData] = useState([]);
-    const [activeTab, setActiveTab] = useState(null);
 
+const AdminPanel = () => {
     const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState('none');
+    const [users, setUsers] = useState([]);
+    const [adverts, setAdverts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    //admin kontrolü
-/*
-    useEffect(() => {
-        const adminController = () => {
-            const role = localStorage.getItem('role');
-            if (role !== "admin") {
-                navigate("/login");
-            }
-        };
-        adminController();
-    }, [navigate]);
-*/
-
-//admim logout işemi
-    const adminLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
-        navigate("/login");
-    };
-
-
-    //studentdata işlemi
-    const getStudentData = async () => {
+    const fetchUsers = async () => {
+        setLoading(true);
+        setError(null);
         try {
-            const response = await axios.get("/api/student");
-            if (Array.isArray(response.data)) {
-                setStudentData(response.data);
-                setActiveTab("students");
-            } else {
-                console.log("Öğrenci verisi geçersiz formatta");
-            }
-        } catch (error) {
-            console.log("Öğrenciler getirilirken hata:", error);
+            const response = await axios.get('/api/users', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setUsers(response.data);
+            setActiveTab('users');
+        } catch (err) {
+            console.error('Error fetching users:', err);
+            setError('Failed to load users. Please try again.');
+            setActiveTab('users');
+        } finally {
+            setLoading(false);
         }
     };
 
-
-    //teacxherdata işemi
-    const getTeacherData = async () => {
+    const fetchAdverts = async () => {
+        setLoading(true);
+        setError(null);
         try {
-            const response = await axios.get("/api/teacher");
-            if (Array.isArray(response.data)) {
-                setTeacherData(response.data);
-                setActiveTab("teachers");
-            } else {
-                console.log("Öğretmen verisi geçersiz formatta");
-            }
-        } catch (error) {
-            console.log("Öğretmenler getirilirken hata:", error);
+            const response = await axios.get('/api/adverts');
+            setAdverts(response.data);
+            setActiveTab('adverts');
+        } catch (err) {
+            console.error('Error fetching adverts:', err);
+            setError('Failed to load advertisements. Please try again.');
+            setActiveTab('adverts');
+        } finally {
+            setLoading(false);
         }
     };
 
-
-    //ilan işlemi
-    const getIlan = async () => {
-        try {
-            const response = await axios.get("/api/ilan");
-            if (Array.isArray(response.data)) {
-                setIlanData(response.data);
-                setActiveTab("ilan");
-            } else {
-                console.log("İlan verisi geçersiz formatta");
-            }
-        } catch (error) {
-            console.log("İlanlar getirilirken hata:", error);
-        }
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("cart");
+        navigate("/");
     };
 
-    //dataları silme işlemi
-    const deleteData = async () => {
-        try {
-            const response = await axios.delete("/api/deletedata");
-            if (response.status === 200) {
-                setStudentData([]);
-                setTeacherData([]);
-                setIlanData([]);
-                setActiveTab(null);
-            } else {
-                console.log("Veri silinemedi, API hatası");
-            }
-        } catch (error) {
-            console.log("Veriler silinirken hata:", error);
+    const renderStatusBadge = (status) => {
+        let badgeClass = 'badge ';
+
+        switch (status.toLowerCase()) {
+            case 'active':
+                badgeClass += 'badge-success';
+                break;
+            case 'inactive':
+                badgeClass += 'badge-error';
+                break;
+            case 'scheduled':
+                badgeClass += 'badge-warning';
+                break;
+            default:
+                badgeClass += 'badge-neutral';
         }
+
+        return <span className={badgeClass}>{status}</span>;
     };
 
     return (
-        <div>
-            <button onClick={getStudentData}>Öğrencileri Getir</button>
-            <button onClick={getTeacherData}>Öğretmenleri Getir</button>
-            <button onClick={getIlan}>İlanları Getir</button>
-            <button onClick={adminLogout}>Çıkış Yap</button>
-            <button onClick={deleteData}>Verileri Sil</button>
-            
-            {activeTab === "students" && (
-                <>
-                    <h2>Öğrenciler</h2>
-                    <ul>
-                        {studentData.length > 0 ? (
-                            studentData.map((student, index) => (
-                                <li key={index}>{JSON.stringify(student)}</li>
-                            ))
-                        ) : (
-                            <p>Öğrenci verisi yok.</p>
-                        )}
-                    </ul>
-                </>
-            )}
-            
-            {activeTab === "teachers" && (
-                <>
-                    <h2>Öğretmenler</h2>
-                    <ul>
-                        {teacherData.length > 0 ? (
-                            teacherData.map((teacher, index) => (
-                                <li key={index}>{JSON.stringify(teacher)}</li>
-                            ))
-                        ) : (
-                            <p>Öğretmen verisi yok.</p>
-                        )}
-                    </ul>
-                </>
-            )}
-            
-            {activeTab === "ilan" && (
-                <>
-                    <h2>İlanlar</h2>
-                    <ul>
-                        {ilanData.length > 0 ? (
-                            ilanData.map((ilan, index) => (
-                                <li key={index}>{JSON.stringify(ilan)}</li>
-                            ))
-                        ) : (
-                            <p>İlan verisi yok.</p>
-                        )}
-                    </ul>
-                </>
-            )}
+        <div className="admin-panel">
+            <div className="admin-header">
+                <h1 className="admin-title">Admin Dashboard</h1>
+            </div>
+
+            <div className="admin-container">
+                <div className="admin-sidebar">
+                    <button
+                        className={`admin-nav-button ${activeTab === 'users' ? 'active' : ''}`}
+                        onClick={fetchUsers}
+                    >
+                        <Users size={20} />
+                        <span>Show Users</span>
+                    </button>
+
+                    <button
+                        className={`admin-nav-button ${activeTab === 'adverts' ? 'active' : ''}`}
+                        onClick={fetchAdverts}
+                    >
+                        <BarChart3 size={20} />
+                        <span>Show Adverts</span>
+                    </button>
+
+                    <button
+                        className="admin-nav-button logout-button"
+                        onClick={handleLogout}
+                    >
+                        <LogOut size={20} />
+                        <span>Logout</span>
+                    </button>
+                </div>
+
+                <div className="admin-content">
+                    {loading ? (
+                        <div className="loading-container">
+                            <Loader2 size={40} className="loading-spinner" />
+                            <p>Loading data...</p>
+                        </div>
+                    ) : error ? (
+                        <div className="error-message">
+                            <p>{error}</p>
+                            <button
+                                className="retry-button"
+                                onClick={() => activeTab === 'users' ? fetchUsers() : fetchAdverts()}
+                            >
+                                Try Again
+                            </button>
+                        </div>
+                    ) : activeTab === 'users' ? (
+                        <div className="data-container">
+                            <h2>User Management</h2>
+                            <p className="data-count">{users.length} users found</p>
+                            <div className="table-container">
+                                <table className="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Created</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.map(user => (
+                                            <tr key={user.id}>
+                                                <td>#{user.id}</td>
+                                                <td>{user.name}</td>
+                                                <td>{user.email}</td>
+                                                <td>{user.role}</td>
+                                                <td>{user.createdAt}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : activeTab === 'adverts' ? (
+                        <div className="data-container">
+                            <h2>Advert Management</h2>
+                            <p className="data-count">{adverts.length} advertisements found</p>
+                            <div className="table-container">
+                                <table className="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Proffession</th>
+                                            <th>Location</th>
+                                            <th>Lesson</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {adverts.map(advert => (
+                                            <tr key={advert.id}>
+                                                <td>#{advert.id}</td>
+                                                <td>{advert.title}</td>
+                                                <td>{advert.description}</td>
+                                                <td>{advert.price}</td>
+                                                <td>{advert.proffession}</td>
+                                                <td>{advert.location}</td>
+                                                <td>{advert.lesson}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="welcome-message">
+                            <h2>Welcome to the Admin Dashboard</h2>
+                            <p>Select an option from the sidebar to get started.</p>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
-}
+};
 
-export default Admin;
+export default AdminPanel;

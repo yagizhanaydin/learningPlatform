@@ -99,6 +99,9 @@ function AnaSayfa() {
           {isLoggedIn && role === 'Teacher' && (
             <span onClick={() => navigate("/teacherpanel")}>Teacher Panel</span>
           )}
+          {isLoggedIn && role === 'admin' && (
+            <span onClick={() => navigate("/adminpanel")}>Admin Panel</span>
+          )}
         </div>
         {isLoggedIn && (
           <div className={styles.navbarSepet} onClick={sepeteGit}>
