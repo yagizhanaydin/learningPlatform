@@ -1,0 +1,141 @@
+.chatContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: #2f3136;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatContainer h2 {
+  padding: 1rem;
+  margin: 0;
+  background-color: #202225;
+  border-bottom: 1px solid #40444b;
+}
+
+.chatWrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.messagesContainer {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #36393f;
+}
+
+.messageBox {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.myMessage {
+  background-color: #7289da;
+  margin-left: auto;
+}
+
+.otherMessage {
+  background-color: #40444b;
+}
+
+.messageBox strong {
+  color: #ffffff;
+  margin-right: 0.5rem;
+}
+
+.otherChats {
+  width: 240px;
+  background-color: #2f3136;
+  padding: 1rem;
+  border-left: 1px solid #202225;
+}
+
+.otherChats h3 {
+  color: #8e9297;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.otherChats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.otherChats li {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  background-color: #36393f;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.otherChats li:hover {
+  background-color: #40444b;
+}
+
+.form {
+  padding: 1rem;
+  background-color: #40444b;
+  display: flex;
+  gap: 1rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #202225;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.input::placeholder {
+  color: #8e9297;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #7289da;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #7289da;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #677bc4;
+}
+
+/* Scrollbar Styling */
+.messagesContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messagesContainer::-webkit-scrollbar-track {
+  background: #2f3136;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background: #202225;
+  border-radius: 4px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb:hover {
+  background: #40444b;
+}

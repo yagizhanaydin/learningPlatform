@@ -1,0 +1,222 @@
+/* Genel container ayarları */
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: linear-gradient(135deg, #ffffff, #f3f3f3);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Başlık stilleri */
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+/* Logout ve Chat butonları */
+.logoutIcon,
+.chatIcon {
+  font-size: 42px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.logoutIcon {
+  right: 70px;
+  color: #e74c3c;
+}
+
+.chatIcon {
+  right: 15px;
+  color: #007bff;
+}
+
+.logoutIcon:hover,
+.chatIcon:hover {
+  transform: scale(1.15);
+}
+
+/* Öğretmen Bilgileri */
+.teacherInfo {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.teacherInfo ul {
+  list-style: none;
+  padding: 0;
+}
+
+.teacherInfo li {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.teacherInfo strong {
+  color: #007bff;
+}
+
+/* Yeni İlan Ekle Formu */
+.formContainer {
+  width: 100%;
+  max-width: 500px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 25px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Form başlığı */
+.formTitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Input alanları */
+form input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+form input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+/* Buton */
+form button {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background: linear-gradient(135deg, #0056b3, #004494);
+}
+
+/* Responsive (Mobil uyumluluk) */
+@media screen and (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .logoutIcon,
+  .chatIcon {
+    font-size: 34px;
+    padding: 8px;
+  }
+
+  .formContainer {
+    width: 100%;
+  }
+
+  .formTitle {
+    font-size: 20px;
+  }
+}
+
+.advertsContainer {
+  margin-bottom: 2rem;
+}
+
+.advertsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.advertCard {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.advertCard:hover {
+  transform: translateY(-5px);
+}
+
+.advertCard h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.advertCard p {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.advertDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.videoIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: #4a6bdf;
+  font-size: 0.9rem;
+}
+
+.advertHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.deleteButton:hover {
+  color: #cc0000;
+}

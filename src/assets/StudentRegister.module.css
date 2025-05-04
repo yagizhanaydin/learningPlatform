@@ -1,0 +1,114 @@
+/* Body ve html sıfırlaması */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Yükseklik için */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Sayfa ana container'ı */
+.student-register-page {
+    background: linear-gradient(135deg, #007BFF, #6fc3f7); 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form */
+.form {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.form:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Başlık */
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: blue;
+}
+
+/* Inputlar */
+.input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    border-color: #007BFF;
+    background-color: #e7f1ff;
+    outline: none;
+}
+
+/* Hata mesajları */
+.errorMessage {
+    color: #f44336;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Buton */
+.button {
+    width: 100%;
+    padding: 14px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: green;
+    transform: translateY(-3px);
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+/* Mobil uyumlu stiller */
+@media (max-width: 480px) {
+    .form {
+        padding: 20px;
+    }
+
+    .input, .button {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Placeholder stil */
+::placeholder {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
