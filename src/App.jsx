@@ -10,6 +10,7 @@ import StudentPanel from './student/StudentPanel';
 import Admin from './admin/Admin';
 import Settings from './student/Settings';
 import Sepet from './Sepet';
+import CourseLibrary from './student/CourseLibrary';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function AppRoutes() {
       <Route path="/adminpanel" element={<Admin />} />
       <Route path="/setting" element={<Settings />} />
       <Route path="/sepet" element={<Sepet />} />
+      <Route path="/mylessons" element={<CourseLibrary />} />
     </Routes>
   );
 }

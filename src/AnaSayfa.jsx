@@ -65,6 +65,13 @@ function AnaSayfa() {
       urun.title.toLowerCase().includes(aramaTerimi.toLowerCase())
     )
   );
+  async function handleLogout(e) {
+    e.preventDefault()
+    localStorage.removeItem("token")
+    localStorage.removeItem("role")
+    localStorage.removeItem("cart")
+    navigate('/login')
+  }
 
   const sepeteGit = () => {
     navigate("/sepet");
@@ -103,6 +110,11 @@ function AnaSayfa() {
             <span onClick={() => navigate("/adminpanel")}>Admin Panel</span>
           )}
         </div>
+        {isLoggedIn && (
+          <>
+            <button onClick={handleLogout}>logout</button>
+          </>
+        )}
         {isLoggedIn && (
           <div className={styles.navbarSepet} onClick={sepeteGit}>
             <SlBasket title='Cart' size={20} />
