@@ -17,6 +17,8 @@ function CheckoutForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const course_id = courseID[0]
+  const teacherID = cartData.map(course => course.member_id)
+  const teacher_id = teacherID[0]
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!stripe || !elements) {
@@ -60,7 +62,7 @@ function CheckoutForm() {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ course_id }),
+            body: JSON.stringify({ course_id, teacher_id }),
           });
           localStorage.removeItem("cart");
           navigate('/mylessons')

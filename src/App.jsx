@@ -11,6 +11,7 @@ import Admin from './admin/Admin';
 import Settings from './student/Settings';
 import Sepet from './Sepet';
 import CourseLibrary from './student/CourseLibrary';
+import Chat from './teacher/Chat';
 
 function App() {
   return (
@@ -53,6 +54,8 @@ function AppRoutes() {
       <Route path="/setting" element={<Settings />} />
       <Route path="/sepet" element={<Sepet />} />
       <Route path="/mylessons" element={<CourseLibrary />} />
+      <Route path="/chat" element={<Chat />} />
+
     </Routes>
   );
 }

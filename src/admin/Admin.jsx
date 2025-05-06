@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Users, BarChart3, LogOut, Loader2 } from 'lucide-react';
+import { Users, BarChart3, LogOut, Loader2, Trash2 } from 'lucide-react';
 import './admin.css';
 import { useNavigate } from 'react-router-dom';
-
 
 const AdminPanel = () => {
     const navigate = useNavigate();
@@ -46,6 +45,42 @@ const AdminPanel = () => {
             setActiveTab('adverts');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleDeleteUser = async (userId) => {
+        if (!window.confirm('Are you sure you want to delete this user?')) {
+            return;
+        }
+
+        try {
+            await axios.delete(`/api/user/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setUsers(users.filter(user => user.id !== userId));
+        } catch (err) {
+            console.error('Error deleting user:', err);
+            setError('Failed to delete user. Please try again.');
+        }
+    };
+
+    const handleDeleteAdvert = async (advertId) => {
+        if (!window.confirm('Are you sure you want to delete this advertisement?')) {
+            return;
+        }
+
+        try {
+            await axios.delete(`/api/adverts/${advertId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setAdverts(adverts.filter(advert => advert.id !== advertId));
+        } catch (err) {
+            console.error('Error deleting advertisement:', err);
+            setError('Failed to delete advertisement. Please try again.');
         }
     };
 
@@ -138,6 +173,7 @@ const AdminPanel = () => {
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Created</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -148,6 +184,15 @@ const AdminPanel = () => {
                                                 <td>{user.email}</td>
                                                 <td>{user.role}</td>
                                                 <td>{user.createdAt}</td>
+                                                <td>
+                                                    <button
+                                                        className="delete-button"
+                                                        onClick={() => handleDeleteUser(user.id)}
+                                                        title="Delete user"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -169,6 +214,7 @@ const AdminPanel = () => {
                                             <th>Proffession</th>
                                             <th>Location</th>
                                             <th>Lesson</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -181,6 +227,15 @@ const AdminPanel = () => {
                                                 <td>{advert.proffession}</td>
                                                 <td>{advert.location}</td>
                                                 <td>{advert.lesson}</td>
+                                                <td>
+                                                    <button
+                                                        className="delete-button"
+                                                        onClick={() => handleDeleteAdvert(advert.id)}
+                                                        title="Delete advertisement"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
