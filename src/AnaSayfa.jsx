@@ -109,7 +109,11 @@ function AnaSayfa() {
           {isLoggedIn && role === 'admin' && (
             <span onClick={() => navigate("/adminpanel")}>Admin Panel</span>
           )}
+          {isLoggedIn && role === 'Student' && (
+            <span onClick={() => navigate("/mylessons")}>My Lessons</span>
+          )}
         </div>
+
         {isLoggedIn && (
           <>
             <button onClick={handleLogout}>logout</button>
