@@ -1,12 +1,59 @@
-# React + Vite
+# Gözpedi Kalite Kontrol Sistemi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gerçek zamanlı görüntü işleme ile medikal üretim bandında göz pedi ürünlerinin kalite kontrolünü sağlayan bir yapay zeka destekli sistemdir. Proje hem Python API hem de React Native mobil uygulama ile birlikte çalışmaktadır.
 
-Currently, two official plugins are available:
+Takım Adı: Sharingans  
+GitHub Etiketi: #ttg5hackathon2025
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Özellikler
 
-## Expanding the ESLint configuration
+### Python Back-End
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- LLAMA tabanlı yapay zeka analizi
+- Derin öğrenme temelli çok aşamalı görsel analiz
+- Görüntü işleme (OpenCV)
+- REST API desteği
+
+### Mobil Uygulama
+
+- Yapay zeka destekli analiz
+- Android / iOS platformu desteği
+- Gerçek zamanlı analiz
+- Yerel depolama
+- Analiz geçmişi
+- Kamera entegrasyonu
+
+## FPS Ölçümü
+
+- Test Süresi: 1 dakika  
+- İşlenen Görüntü Sayısı: 90 frame  
+- Ortalama FPS: 1.5  
+- Test Cihazı: Mobil kamera (1080p çözünürlük)
+
+## Kamera Özellikleri
+
+- Desteklenen Kamera Türleri: Mobil cihaz kamerası
+- Önerilen Çözünürlük: 1080p
+- Ölçülen FPS Değeri: 1.5 FPS
+
+## Kullanılan Teknolojiler
+
+### Python
+
+- opencv-python  
+- numpy  
+- joblib  
+- scikit-learn  
+- transformers (LLAMA için)  
+- torch  
+
+### Mobil
+
+- React Native (Expo)  
+- Axios, React Navigation gibi yardımcı paketler  
+
+## Kurulum Talimatları
+
+### Python API
+
+1. Reponun Klonlanması:
